@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prevención del Cáncer de Colon — Windows 98 style (actualizado)</title>
+<style>
+  :root{
+    --bg:#008080;
+    --panel:#c0c0c0;
+    --titlebar:#000080;
+    --titlebar-text:#fff;
+    --window-border:#000;
+    --shadow: rgba(0,0,0,0.35);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  html,body{
+    height:100%;
+    margin:0;
+    background:url('https://images2.alphacoders.com/737/thumb-1920-737508.png') no-repeat center center fixed;
+    background-size:cover;
+    color:#000;
+    cursor:url('https://cur.cursors-4u.net/cursors/cur-2/cur116.cur'), auto;
+  }
+  .desktop{padding:24px;display:flex;flex-wrap:wrap;gap:18px;}
+  .icon{width:72px;text-align:center;color:#fff;font-size:12px;cursor:pointer;animation:fadeIn 1s ease-in;}
+  .icon img{width:48px;height:48px;display:block;margin:0 auto 6px;transition:filter 0.3s;}
+  .icon:hover img{filter:brightness(1.4);}
+  .taskbar{position:fixed;left:0;right:0;bottom:0;height:40px;background:var(--panel);border-top:2px solid #fff;border-bottom:2px solid #404040;display:flex;align-items:center;padding:4px 6px;box-sizing:border-box}
+  .start{display:flex;align-items:center;gap:8px;background:linear-gradient(#e0e0e0,#c8c8c8);border:2px solid #fff;padding:4px 8px;border-radius:2px;cursor:pointer;transition:transform 0.1s;}
+  .start:active{transform:translateY(1px)}
+  .task-buttons{flex:1;display:flex;gap:6px;padding-left:8px}
+  .clock{min-width:80px;text-align:center;font-size:12px}
+  .window{position:absolute;width:540px;background:var(--panel);border:2px solid var(--window-border);box-shadow:4px 4px 0px var(--shadow);display:none;animation:zoomIn 0.25s ease-out;}
+  .titlebar{height:28px;background:linear-gradient(var(--titlebar),#000080);color:var(--titlebar-text);display:flex;align-items:center;justify-content:space-between;padding:0 6px;box-sizing:border-box;border-bottom:2px solid #fff;cursor:move}
+  .titlebar .title{font-weight:bold}
+  .titlebar .controls{display:flex;gap:4px}
+  .titlebar .btn{width:20px;height:18px;background:linear-gradient(#c0c0c0,#909090);border:2px solid #404040;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;cursor:pointer;user-select:none}
+  .window .content{padding:10px;background:#fff;height:320px;overflow:auto;font-size:14px}
+  .statusbar{height:22px;background:linear-gradient(#e8e8e8,#cfcfcf);border-top:2px solid #fff;padding:3px 6px;box-sizing:border-box;font-size:12px}
+  .btn-98{display:inline-block;padding:4px 8px;border:2px solid #fff;background:linear-gradient(#e0e0e0,#bdbdbd);box-shadow:1px 1px #404040;cursor:pointer;margin:4px;transition:transform 0.1s;}
+  .btn-98:active{transform:scale(0.95);} 
+  img.content-img{max-width:100%;height:auto;margin:6px 0;border:2px solid #000}
+  .progress-container{width:100%;height:20px;border:2px inset #fff;background:#dcdcdc;margin-top:6px}
+  .progress-bar{height:100%;width:0;background:#000080;color:#fff;font-size:12px;text-align:center;line-height:18px;transition:width 1s ease-in-out;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  @keyframes zoomIn{from{transform:scale(0.8);opacity:0;}to{transform:scale(1);opacity:1;}}
+  /* Ajuste extra para iframe integrado */
+  .embedded-iframe{width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+  <!-- Sonidos -->
+  <audio id="sound-start" src="startup.wav"></audio>
+  <audio id="sound-click" src="click.wav"></audio>
+  <audio id="sound-close" src="close.wav"></audio>
+
+  <!-- Escritorio -->
+  <div class="desktop" id="desktop">
+    <div class="icon" data-app="concepto">
+      <img src="https://win98icons.alexmeub.com/icons/png/computer-5.png"/>
+      <div>Concepto</div>
+    </div>
+    <div class="icon" data-app="prevencion">
+      <img src="https://win98icons.alexmeub.com/icons/png/document-0.png"/>
+      <div>Prevención</div>
+    </div>
+    <div class="icon" data-app="receta">
+      <img src="https://win98icons.alexmeub.com/icons/png/notepad-2.png"/>
+      <div>Receta</div>
+    </div>
+    <div class="icon" data-app="recursos">
+      <img src="https://win98icons.alexmeub.com/icons/png/directory_closed-4.png"/>
+      <div>Recursos</div>
+    </div>
+    <div class="icon" data-app="cita">
+      <img src="https://win98icons.alexmeub.com/icons/png/camera-2.png"/>
+      <div>CITA</div>
+    </div>
+    <div class="icon" data-app="fuentes" style="position:fixed; bottom:60px; left:10px;">
+      <img src="https://win98icons.alexmeub.com/icons/png/help_book_cool-4.png"/>
+      <div>Fuentes</div>
+    </div>
+  </div>
+
+  <!-- Ventanas -->
+  <div class="window" id="win-concepto" style="left:80px;top:40px;">
+    <div class="titlebar"><div class="title">Concepto</div><div class="controls"><div class="btn close">X</div></div></div>
+    <div class="content">
+      <h2>Concepto de Cáncer de Colon</h2>
+      <img class="content-img" src="https://www.redaccionmedica.com/images/enfermedades/cancer-colon.jpg" alt="Colon"/>
+      <p>El <strong>cáncer de colon</strong> es una enfermedad en la que células anormales en el colon o recto se multiplican sin control. Generalmente comienza con pólipos que, si no se detectan, pueden transformarse en tumores malignos.</p>
+      <p><strong>Síntomas más comunes:</strong></p>
+      <ul>
+        <li>Cambios en los hábitos intestinales (diarrea o estreñimiento persistentes).</li>
+        <li>Sangrado rectal o heces oscuras con sangre.</li>
+        <li>Dolor abdominal recurrente, gases o cólicos.</li>
+        <li>Pérdida de peso sin causa aparente.</li>
+        <li>Fatiga crónica.</li>
+      </ul>
+      <p><strong>Factores de riesgo:</strong> Edad mayor a 50 años, dieta baja en fibra, obesidad, sedentarismo, antecedentes familiares, enfermedades inflamatorias intestinales.</p>
+      <p><strong>Tratamientos:</strong> Cirugía, quimioterapia, radioterapia y terapias dirigidas. La detección temprana incrementa la supervivencia.</p>
+    </div>
+    <div class="statusbar">Información ampliada</div>
+  </div>
+
+  <!-- MODIFIED Prevencion window: embedded the provided Paginaprevencion.html as an iframe -->
+  <div class="window" id="win-prevencion" style="left:120px;top:70px;">
+    <div class="titlebar"><div class="title">Prevención</div><div class="controls"><div class="btn close">X</div></div></div>
+    <div class="content" style="height:420px; padding:0;">
+      <!-- The original 'Prevención' content has been replaced by an embedded page (Paginaprevencion.html).
+           This keeps the rest of the Win98 UI intact while showing the full, styled prevention page. -->
+      <iframe class="embedded-iframe" src="Paginaprevencion.html" title="Prevención - Cáncer de Colon (integrado)"></iframe>
+    </div>
+    <div class="statusbar">Consejos de prevención</div>
+  </div>
+
+  <div class="window" id="win-receta" style="left:220px;top:110px;">
+    <div class="titlebar"><div class="title">Receta Saludable</div><div class="controls"><div class="btn close">X</div></div></div>
+    <div class="content">
+      <h2>Ensalada de Quinoa</h2>
+      <img class="content-img" src="https://danzadefogones.com/wp-content/uploads/2024/08/ensalada-de-quinoa-facil.jpg"/>
+      <p>Una receta nutritiva, rica en fibra y antioxidantes, ideal para una alimentación saludable.</p>
+      <h3>Ingredientes:</h3>
+      <ul>
+        <li>1 taza de quinoa cocida</li>
+        <li>1 pepino en cubos</li>
+        <li>2 tomates medianos</li>
+        <li>1 zanahoria rallada</li>
+        <li>Aceite de oliva, jugo de limón, sal y pimienta al gusto</li>
+      </ul>
+      <h3>Preparación:</h3>
+      <ol>
+        <li>Cocer la quinoa en agua con sal.</li>
+        <li>Mezclar con las verduras frescas.</li>
+        <li>Aliñar con aceite de oliva y limón.</li>
+      </ol>
+    </div>
+    <div class="statusbar">Receta ampliada</div>
+  </div>
+
+  <div class="window" id="win-recursos" style="left:320px;top:160px;">
+    <div class="titlebar"><div class="title">Recursos</div><div class="controls"><div class="btn close">X</div></div></div>
+    <div class="content">
+      <h2>Recursos útiles</h2>
+      <ul>
+        <li><a href="https://www.who.int" target="_blank">OMS — Organización Mundial de la Salud</a></li>
+        <li><a href="https://www.cancer.org" target="_blank">American Cancer Society</a></li>
+        <li><a href="https://www.cdc.gov" target="_blank">CDC — Centros para el Control y la Prevención de Enfermedades</a></li>
+        <li><a href="https://www.redaccionmedica.com" target="_blank">Redacción Médica</a></li>
+        <li><a href="https://danzadefogones.com" target="_blank">Recetas saludables — Danza de Fogones</a></li>
+      </ul>
+      <p>En estos enlaces encontrarás guías, investigaciones y más información para el cuidado de tu salud.</p>
+    </div>
+    <div class="statusbar">Enlaces oficiales</div>
+  </div>
+
+  <div class="window" id="win-cita" style="left:180px;top:200px;">
+    <div class="titlebar"><div class="title">CITA</div><div class="controls"><div class="btn close">X</div></div></div>
+    <div class="content">
+      <h2>Video de CITA</h2>
+      <video controls width="100%">
+        <source src="cita.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="statusbar">Reproducción</div>
+  </div>
+
+  <div class="window" id="win-fuentes" style="left:400px;top:220px;">
+    <div class="titlebar"><div class="title">Fuentes</div><div class="controls"><div class="btn close">X</div></div></div>
+    <div class="content">
+      <h2>Fuentes de información</h2>
+      <ul>
+        <li><a href="https://www.who.int" target="_blank">OMS — Organización Mundial de la Salud</a></li>
+        <li><a href="https://www.cancer.org" target="_blank">American Cancer Society</a></li>
+        <li><a href="https://www.cdc.gov" target="_blank">CDC</a></li>
+        <li><a href="https://www.redaccionmedica.com" target="_blank">Redacción Médica — Concepto del cáncer de colon</a></li>
+        <li><a href="https://danzadefogones.com" target="_blank">Receta de ensalada de quinoa</a></li>
+        <li><a href="https://www.youtube.com/watch?v=AKlrIwKj0Do" target="_blank">Música de fondo (YouTube)</a></li>
+      </ul>
+    </div>
+    <div class="statusbar">Referencias</div>
+  </div>
+
+  <!-- Barra de tareas -->
+  <div class="taskbar">
+    <div class="start" id="startBtn"> <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png"/> <strong>Inicio</strong></div>
+    <div class="task-buttons" id="taskButtons"></div>
+    <div class="clock" id="clock">00:00</div>
+  </div>
+
+  <!-- Música de fondo YouTube en una esquina -->
+  <iframe 
+    width="200" height="120" 
+    src="https://www.youtube.com/embed/AKlrIwKj0Do?autoplay=1&loop=1&playlist=AKlrIwKj0Do" 
+    frameborder="0" 
+    allow="autoplay" 
+    style="position:fixed; bottom:50px; right:10px; z-index:999;">
+  </iframe>
+
+<script>
+// reproducir sonido
+function playSound(id) {
+  const el=document.getElementById(id);
+  if(el){ el.currentTime=0; el.play(); }
+}
+
+// sonido al iniciar
+window.addEventListener("load", ()=>{ playSound("sound-start"); });
+
+// reloj
+function updateClock(){
+  const d=new Date();
+  const h=String(d.getHours()).padStart(2,'0');
+  const m=String(d.getMinutes()).padStart(2,'0');
+  document.getElementById('clock').textContent = h+':'+m;
+}
+updateClock(); setInterval(updateClock,1000*30);
+
+// draggable
+function makeDraggable(win){
+  const title=win.querySelector('.titlebar');
+  let offsetX=0,offsetY=0,dragging=false;
+  title.addEventListener('mousedown',(e)=>{dragging=true; offsetX=e.clientX-win.offsetLeft; offsetY=e.clientY-win.offsetTop; win.style.zIndex=Date.now();});
+  document.addEventListener('mousemove',(e)=>{ if(!dragging) return; win.style.left=(e.clientX-offsetX)+'px'; win.style.top=(e.clientY-offsetY)+'px'; });
+  document.addEventListener('mouseup',()=>{dragging=false});
+}
+document.querySelectorAll('.window').forEach(makeDraggable);
+
+// abrir ventana
+document.querySelectorAll('.icon').forEach(ic=>{
+  ic.addEventListener('dblclick',()=>{
+    const app=ic.dataset.app;
+    const w=document.getElementById('win-'+app);
+    if(w){
+      w.style.display='block';
+      w.style.zIndex=Date.now();
+      playSound("sound-click");
+    }
+  });
+});
+
+// cerrar ventana
+function attachCloseButtons(){
+  const closeButtons=document.querySelectorAll('.btn.close');
+  closeButtons.forEach(btn=>{
+    btn.onclick=(e)=>{
+      const win=e.target.closest('.window');
+      if(win){ win.style.display='none'; playSound("sound-close"); }
+    }
+  });
+}
+attachCloseButtons();
+
+// calculo de riesgo (se mantiene para compatibilidad con otras ventanas)
+function calcularRiesgo(){
+  const edad = parseInt(document.getElementById('edad')?.value)||0;
+  if(edad<=0){ alert("Ingresa una edad válida"); return; }
+  const fam = document.getElementById('familiar')?.checked;
+  const inflam = document.getElementById('inflamatoria')?.checked;
+
+  let riesgo = 1;
+  if(edad<30) riesgo = 1;
+  else if(edad<40) riesgo = 2;
+  else if(edad<50) riesgo = 5;
+  else if(edad<60) riesgo = 10;
+  else if(edad<70) riesgo = 18;
+  else riesgo = 25;
+
+  if(fam) riesgo += 10;
+  if(inflam) riesgo += 7;
+  if(riesgo>100) riesgo=100;
+
+  if(document.getElementById('resultadoRiesgo')){
+    document.getElementById('resultadoRiesgo').textContent = `Riesgo estimado: ${riesgo}%`;
+    const barra=document.getElementById('barraRiesgo');
+    if(barra){ barra.style.width=riesgo+'%'; barra.textContent=riesgo+'%'; barra.style.background= riesgo<10? '#008000' : riesgo<20? '#e6b800':'#cc0000'; }
+  }
+}
+</script>
+</body>
+</html>
